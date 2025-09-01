@@ -2671,7 +2671,7 @@ class IDE {
     $("#help-dialog").removeClass("is-active");
   }
   onTileServerChange() {
-    debugger;
+    // debugger;
   }
   onKeyPress(event: KeyboardEvent) {
     if (
