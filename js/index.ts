@@ -41,4 +41,18 @@ function initClickHandler() {
     const handler = ide[handlerName].bind(ide);
     $(this).on(event, handler);
   });
+  // debugger
+  $("#tile_server_global")[0].value = settings.tile_server;
+  make_combobox(
+    $("#tile_server_global"),
+    configs.suggestedTiles.concat(settings.customTiles),
+    settings.customTiles,
+    (tileServer) => {
+      settings.customTiles.splice(settings.customTiles.indexOf(tileServer), 1);
+      settings.save();
+    }
+  );
+  $("#tile_server_global")[0].oninput = () => {
+    alert("test");
+  };
 }
