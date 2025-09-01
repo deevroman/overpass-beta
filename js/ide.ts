@@ -46,7 +46,7 @@ $(document).on("copy", (e) => {
   }
 });
 
-function make_combobox(input, options, deletables, deleteCallback) {
+export function make_combobox(input, options, deletables, deleteCallback) {
   if (input[0].is_combobox) {
     input.autocomplete("option", {source: options});
     return;
@@ -2670,6 +2670,9 @@ class IDE {
   onHelpClose() {
     $("#help-dialog").removeClass("is-active");
   }
+  onTileServerChange() {
+    debugger;
+  }
   onKeyPress(event: KeyboardEvent) {
     if (
       event.key === "F9" || // F9
@@ -2827,5 +2830,6 @@ class IDE {
 }
 
 const ide = new IDE();
+window.ide = ide;
 
 export default ide;

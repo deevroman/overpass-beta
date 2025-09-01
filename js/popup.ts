@@ -12,19 +12,19 @@ export function featurePopupContent(feature: GeoJSON.Feature) {
     popup +=
       `<h4 class="title is-4"><span class="t" data-t="popup.node">Node</span>` +
       ` <a href="//www.openstreetmap.org/node/${feature.properties.id}" target="_blank">${feature.properties.id}</a>` +
-      ` <a href="//www.openstreetmap.org/edit?node=${feature.properties.id}" target="_blank">✏</a>` +
+      // ` <a href="//www.openstreetmap.org/edit?node=${feature.properties.id}" target="_blank">✏</a>` +
       `</h4>`;
   else if (feature.properties.type == "way")
     popup +=
       `<h4 class="title is-4"><span class="t" data-t="popup.way">Way</span>` +
       ` <a href="//www.openstreetmap.org/way/${feature.properties.id}" target="_blank">${feature.properties.id}</a>` +
-      ` <a href="//www.openstreetmap.org/edit?way=${feature.properties.id}" target="_blank">✏</a>` +
+      // ` <a href="//www.openstreetmap.org/edit?way=${feature.properties.id}" target="_blank">✏</a>` +
       `</h4>`;
   else if (feature.properties.type == "relation")
     popup +=
       `<h4 class="title is-4"><span class="t" data-t="popup.relation">Relation</span>` +
       ` <a href="//www.openstreetmap.org/relation/${feature.properties.id}" target="_blank">${feature.properties.id}</a>` +
-      ` <a href="//www.openstreetmap.org/edit?relation=${feature.properties.id}" target="_blank">✏</a>` +
+      // ` <a href="//www.openstreetmap.org/edit?relation=${feature.properties.id}" target="_blank">✏</a>` +
       `</h4>`;
   else if (feature.properties.id)
     popup += `<h5 class="subtitle is-5">${feature.properties.type || ""} #${feature.properties.id}</h5>`;
@@ -150,12 +150,59 @@ export function featurePopupContent(feature: GeoJSON.Feature) {
     popup += "</ul>";
   }
 
+  let lat = null;
+  let lon = null;
+  const zoom = parseInt(localStorage.getItem("overpass-ide_coords_zoom"));
+
   if (feature.geometry.type == "Point") {
-    const lat = feature.geometry.coordinates[1];
-    const lon = feature.geometry.coordinates[0];
+    lat = feature.geometry.coordinates[1];
+    lon = feature.geometry.coordinates[0];
+  } else if (feature.geometry.type == "LineString") {
+    lat =
+      (feature.geometry.coordinates
+        .map((i) => i[1])
+        .reduce((a, b) => Math.max(a, b), 0) +
+        feature.geometry.coordinates
+          .map((i) => i[1])
+          .reduce((a, b) => Math.min(a, b), Infinity)) /
+      2;
+    lon =
+      (feature.geometry.coordinates
+        .map((i) => i[0])
+        .reduce((a, b) => Math.max(a, b), 0) +
+        feature.geometry.coordinates
+          .map((i) => i[0])
+          .reduce((a, b) => Math.min(a, b), Infinity)) /
+      2;
+  } else if (feature.geometry.type == "Polygon") {
+    lat =
+      (feature.geometry.coordinates[0]
+        .map((i) => i[1])
+        .reduce((a, b) => Math.max(a, b), 0) +
+        feature.geometry.coordinates[0]
+          .map((i) => i[1])
+          .reduce((a, b) => Math.min(a, b), Infinity)) /
+      2;
+    lon =
+      (feature.geometry.coordinates[0]
+        .map((i) => i[0])
+        .reduce((a, b) => Math.max(a, b), 0) +
+        feature.geometry.coordinates[0]
+          .map((i) => i[0])
+          .reduce((a, b) => Math.min(a, b), Infinity)) /
+      2;
+  }
+  if (lat !== null && lon !== null) {
+    const textForCopy = `${lat.toFixed(7)} ${lon.toFixed(7)}`;
     popup +=
       `<h3 class="subtitle is-5"><span class="t" data-t="popup.coordinates">Coordinates</span></h3>` +
-      `<p><a href="geo:${lat},${lon}">${lat} / ${lon}</a> <small>(lat/lon)</small></p>`;
+      `<p><a href="geo:${lat.toFixed(7)},${lon.toFixed(7)}">${lat}  ${lon}</a> <svg title="click to copy ${textForCopy}" copy-text="${textForCopy}" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="copy-coordinates-btn lucide lucide-file-icon lucide-file" style="cursor: pointer; position: relative; left: 3px; top: 1px;"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg> </p>` +
+      `<p style="padding-top: 10px; display: flex; justify-content: space-between;">
+          <span>
+            <a href="https://yandex.ru/maps/?l=stv,sta&ll=${lon},${lat}&z=${17}" target="_blank">Yandex</a>.<a href="https://yandex.com/maps/?l=stv%2Csta&ll=${lon}%2C${lat}&panorama%5Bdirection%5D=0%2C0&panorama%5Bfull%5D=true&panorama%5Bpoint%5D=${lon}%2C${lat}&panorama%5Bspan%5D=0%2C0&z=${zoom + 2}" target="_blank">Panoramas</a>
+          </span> 
+          <a href="https://google.com/maps/@?api=1&map_action=pano&parameters&viewpoint=${lat},${lon}" target="_blank">Street View</a>
+       </p>`;
   }
   if (
     $.inArray(feature.geometry.type, [

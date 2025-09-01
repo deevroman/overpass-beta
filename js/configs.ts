@@ -19,16 +19,19 @@ export default {
   // https://www.openstreetmap.org/copyright
   tileServerAttribution: `© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors`,
   suggestedTiles: [
-    "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+    "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    "https://mt0.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+    "https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png",
+    "https://clarity.maptiles.arcgis.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png"
     //"http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png",
     //"http://{s}.tile2.opencyclemap.org/transport/{z}/{x}/{y}.png",
     //"http://{s}.tile3.opencyclemap.org/landscape/{z}/{x}/{y}.png",
     //"http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.jpg",
   ],
   defaultMapView: {
-    lat: 41.89,
-    lon: 12.492,
-    zoom: 16
+    lat: 59.921,
+    lon: 30.1541,
+    zoom: 10
   },
   maxMapZoom: 20,
   short_url_service: "",

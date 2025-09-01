@@ -27,7 +27,9 @@ import "../css/default.css";
 import "../css/compact.css";
 
 // initialize ide on document ready
-import ide from "./ide";
+import ide, {make_combobox} from "./ide";
+import configs from "./configs";
+import settings from "./settings";
 $(document).ready(() => ide.init());
 $(document).ready(initClickHandler);
 

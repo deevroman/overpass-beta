@@ -668,6 +668,17 @@ class Overpass {
                         .setContent(popup);
                       p.layer = layer;
                       overpass.fire("onPopupReady", p);
+                      document
+                        .querySelectorAll(".copy-coordinates-btn")
+                        .forEach((i) => {
+                          i.onclick = (e) => {
+                            navigator.clipboard
+                              .writeText(e.target.getAttribute("copy-text"))
+                              .then(() => {
+                                alert(e.target.getAttribute("copy-text"));
+                              });
+                          };
+                        });
                     });
                   }
                 } as L.GeoJSONOptions
