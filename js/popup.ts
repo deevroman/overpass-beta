@@ -199,9 +199,9 @@ export function featurePopupContent(feature: GeoJSON.Feature) {
       `<p><a href="geo:${lat.toFixed(7)},${lon.toFixed(7)}">${lat}  ${lon}</a> <svg title="click to copy ${textForCopy}" copy-text="${textForCopy}" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="copy-coordinates-btn lucide lucide-file-icon lucide-file" style="cursor: pointer; position: relative; left: 3px; top: 1px;"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg> </p>` +
       `<p style="padding-top: 10px; display: flex; justify-content: space-between;">
           <span>
-            <a href="https://yandex.ru/maps/?l=stv,sta&ll=${lon},${lat}&z=${17}" target="_blank">Yandex</a>.<a href="https://yandex.com/maps/?l=stv%2Csta&ll=${lon}%2C${lat}&panorama%5Bdirection%5D=0%2C0&panorama%5Bfull%5D=true&panorama%5Bpoint%5D=${lon}%2C${lat}&panorama%5Bspan%5D=0%2C0&z=${zoom + 2}" target="_blank">Panoramas</a>
+            <a href="https://yandex.ru/maps/?l=stv,sta&ll=${lon},${lat}&z=${17}" target="_blank" rel="noreferrer">Yandex</a>.<a href="https://yandex.com/maps/?l=stv%2Csta&ll=${lon}%2C${lat}&panorama%5Bdirection%5D=0%2C0&panorama%5Bfull%5D=true&panorama%5Bpoint%5D=${lon}%2C${lat}&panorama%5Bspan%5D=0%2C0&z=${zoom + 2}" target="_blank" rel="noreferrer">Panoramas</a>
           </span> 
-          <a href="https://google.com/maps/@?api=1&map_action=pano&parameters&viewpoint=${lat},${lon}" target="_blank">Street View</a>
+          <a href="https://google.com/maps/@?api=1&map_action=pano&parameters&viewpoint=${lat},${lon}" target="_blank" rel="noreferrer">Street View</a>
        </p>`;
   }
   if (

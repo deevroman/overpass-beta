@@ -675,7 +675,7 @@ class Overpass {
                             navigator.clipboard
                               .writeText(e.target.getAttribute("copy-text"))
                               .then(() => {
-                                alert(e.target.getAttribute("copy-text"));
+                                console.log(e.target.getAttribute("copy-text"));
                               });
                           };
                         });

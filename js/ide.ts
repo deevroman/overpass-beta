@@ -73,6 +73,9 @@ export function make_combobox(input, options, deletables, deleteCallback) {
           options.splice(options.indexOf(item), 1);
           input.autocomplete("option", "source", options);
           return false;
+        } else {
+          ide.map.tile_layer.setUrl(item.value);
+          // todo save settings
         }
       })
       .appendTo(ul);

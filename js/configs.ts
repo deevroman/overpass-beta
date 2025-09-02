@@ -21,8 +21,8 @@ export default {
   suggestedTiles: [
     "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
     "https://mt0.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
-    "https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png",
-    "https://clarity.maptiles.arcgis.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png"
+    "https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png?blankTile=false",
+    "https://clarity.maptiles.arcgis.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png?blankTile=false"
     //"http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png",
     //"http://{s}.tile2.opencyclemap.org/transport/{z}/{x}/{y}.png",
     //"http://{s}.tile3.opencyclemap.org/landscape/{z}/{x}/{y}.png",

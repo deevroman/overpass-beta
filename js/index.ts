@@ -52,7 +52,10 @@ function initClickHandler() {
       settings.save();
     }
   );
-  $("#tile_server_global")[0].oninput = () => {
-    alert("test");
+  $("#tile_server_global")[0].onkeypress = (event) => {
+    if (event.key === "Enter") {
+      ide.map.tile_layer.setUrl($("#tile_server_global")[0].value);
+      // todo save settings
+    }
   };
 }
