@@ -12,7 +12,7 @@
     display: inline-block;
   }
   .navbar .icon {
-    display: none;
+    /*display: none;*/
   }
 
   #editor {
